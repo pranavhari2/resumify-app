@@ -5,13 +5,20 @@ function CoverLetter() {
   const [companyName, setCompanyName] = useState('');
   const [position, setPosition] = useState('');
   const [resume, setResume] = useState(null);
-  const [result, setResult] = useState('result');
+  const [description, setDescription] = useState('');
+  const [companyWebsite, setCompanyWebsite] = useState('');
+  const [userPosition, setUserPosition] = useState('');
+  const [result, setResult] = useState('');
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('companyName', companyName);
+    formData.append('company_name', companyName);
     formData.append('position', position);
+    formData.append('company_website', companyWebsite);
+    formData.append('description', description);
+    formData.append('user_position', userPosition);
     formData.append('resume', resume);
 
     try {
@@ -44,6 +51,30 @@ function CoverLetter() {
           className="w-full p-2 border border-gray-300 rounded"
         />
         <input
+          type="text"
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+          className="w-full p-2 border border-gray-300 rounded"
+        />
+        <input
+          type="text"
+          placeholder="Company Website"
+          value={companyWebsite}
+          onChange={(e) => setCompanyWebsite(e.target.value)}
+          required
+          className="w-full p-2 border border-gray-300 rounded"
+        />
+        <input
+          type="text"
+          placeholder="Your Position"
+          value={userPosition}
+          onChange={(e) => setUserPosition(e.target.value)}
+          required
+          className="w-full p-2 border border-gray-300 rounded"
+        />
+        <input
           type="file"
           placeholder='Attach Resume'
           accept=".pdf,.doc,.docx"
@@ -54,8 +85,7 @@ function CoverLetter() {
         <button type="submit" className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300'>Generate Cover Letter</button>
       </form>
       <div>
-        <h2>Generated Cover Letter</h2>
-        <p>{result}</p>
+        <p className='flex flex-col p-5 w-full'>{result}</p>
       </div>
     </div>
   );
